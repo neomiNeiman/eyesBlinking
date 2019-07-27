@@ -1,0 +1,8 @@
+<mat-tab-group (selectedTabChange)="selectedTabChange($event)">
+  <mat-tab label="Video">
+    <app-open-web-cam  #webCam [isActive]="activeTab === 'open-web-cam'"></app-open-web-cam>
+  </mat-tab>
+  <mat-tab label="Graph">
+    <app-graph></app-graph>
+  </mat-tab>
+</mat-tab-group>

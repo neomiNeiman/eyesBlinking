@@ -1,0 +1,41 @@
+
+<div class="all" fxLayout="column">
+  <div class="details" fxflex="20%">
+<!--<p>blink ratio value is: {{blinkLeft}}</p>-->
+<mat-card>
+    <mat-card-header>
+        <div mat-card-avatar class="example-header-image"></div>
+        <mat-card-title>Details Blinking</mat-card-title>
+        <mat-card-subtitle>Checking your vigilance</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        <br>
+<p>blinks number in minutes is: {{blinkCounter}}</p>
+<p>Your Avg of blinkings is: {{countStart}}</p>
+<br>
+<mat-progress-bar mode="determinate" value="{{blinkCounter}}"></mat-progress-bar>
+<!--<p>blink that accur into 20 seconds is: {{timeCounter}}</p>-->
+<div class="message">
+<p *ngIf="message!='You fall asleep at: '">{{message}}</p>
+<p *ngIf="message==='You fall asleep at: '">{{message}} {{dateFallAsleep}}</p>
+</div>
+</mat-card-content>
+<mat-card-actions>
+<button mat-raised-button color="primary" type="button" *ngIf="message==='please go to sleep :)'" (click)="stopToSing()">stop singing</button>
+<button mat-raised-button color="primary" type="button" *ngIf="message==='You fall asleep at: '" (click)="goToWakeUp()">I woke up...</button>
+</mat-card-actions>
+</mat-card>
+</div>
+
+
+<div class="camera">
+<div class="open-cam-div" fxflex="70%">
+  <video class="video" #video width="720" height="500" autoplay></video>
+  <canvas class="canvas" #canvas autoplay></canvas>
+ <!-- <img class="imugi" *ngIf="message==='You fall asleep at: '"
+  src="../../../assets/icon.gif"
+  width="720" height="500"> -->
+</div>
+</div>
+</div>
+
