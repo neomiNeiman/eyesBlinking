@@ -1,8 +1,6 @@
 
 <div class="all-register">
-<!--  <img src="assets/add_profile_img8.png" />-->
   <i id="img_add_person" class="material-icons">person_add</i>
- <!-- <h1>Eyes Blinking </h1>-->
   <form [formGroup]="registerForm">
     <mat-form-field >
        <input matInput placeholder="Enter your first name" formControlName="firstName">
@@ -33,7 +31,7 @@
       <mat-error *ngIf="registerForm.get('password').hasError('required')">
           Passwodr is <strong>required</strong>
       </mat-error>
-    </mat-form-field><br/>     
+    </mat-form-field><br/>
     <mat-form-field>
         <input matInput [matDatepicker]="picker1" placeholder="enter your birthday" formControlName="birthday">
         <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>

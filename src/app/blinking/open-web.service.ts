@@ -22,7 +22,7 @@ export class OpenWebService {
     await faceapi.nets.faceRecognitionNet.loadFromUri('assets/models');
   }
 
-  static findBlinking(Eye) {
+  static findBlinking(Eye) { // formula that find blink
     const p1 = Eye[0];
     const p2 = Eye[1];
     const p3 = Eye[2];

@@ -47,22 +47,13 @@ export class OpenWebCamComponent implements OnInit {
   }
 
   @Input() set isActive(value: boolean) {
-
-    // if (!value) {
-    //   this.goToGraphs();
-    // } else if (!this._isActive) {
-    //   this.startVideo(this.video.nativeElement);
-    //   this.drawFace(this.video.nativeElement);
-    // }
-    // this._isActive = value;
-
   }
 
   ngOnInit() {
     this.videoInit();
   }
 
-  public videoInit() {
+  public videoInit() { // load video
     this.startVideo(this.video.nativeElement);
     this.drawFace(this.video.nativeElement);
   }
@@ -78,7 +69,7 @@ export class OpenWebCamComponent implements OnInit {
     });
   }
 
-  private drawFace(video: HTMLVideoElement) {
+  private drawFace(video: HTMLVideoElement) {  // draw points on user's face
 
     const canvas = this.canvas.nativeElement;
     const context = canvas.getContext('2d');
@@ -111,9 +102,9 @@ export class OpenWebCamComponent implements OnInit {
   }
 
   private detectEyeBlink(leftEye: any[], rightEye: any[]) {
-    this.blinkLeft = OpenWebService.findBlinking(leftEye);
+    this.blinkLeft = OpenWebService.findBlinking(leftEye); // send to service to find formula of blink
     this.blinkRight = OpenWebService.findBlinking(rightEye);
-    if (this.blinkLeft < 0.3 && this.blinkRight < 0.3) {
+    if (this.blinkLeft < 0.3 && this.blinkRight < 0.3) { // if user blink
       this.blinkCounter++;
       const blinkDate = new Date();
       this.blinkTimeArry.push(blinkDate);
@@ -125,7 +116,7 @@ export class OpenWebCamComponent implements OnInit {
       const timeStart = Math.abs(crntDate - start);
       const diffTime = Math.abs(crntDate - prevTime);
       if (this.flagBlinking === 0) {
-      if (timeStart <= 20) {
+      if (timeStart <= 20) {  // sampling avg of blinking from this user
           this.countStart++;
         } else {
           this.flagBlinking = 1;
@@ -133,10 +124,10 @@ export class OpenWebCamComponent implements OnInit {
       } else {
       if (diffTime <= 20) {
           this.timeCounter++;
-          if (this.timeCounter > this.countStart) {
+          if (this.timeCounter > this.countStart) { // count of user blinking > from her avg - tired
             this.message = 'please go to sleep :)';
             if (this.flag === 0) {
-              this.playAudio();
+              this.playAudio();  // play an alarm song
               this.flag = 1;
             }
           }
@@ -144,7 +135,7 @@ export class OpenWebCamComponent implements OnInit {
       }
     }
   }
-  private resetCounters() {
+  private resetCounters() {  // reset of data in order to pass them, and to find if user fall asleep
     if ((this.blinkCounter > 150) || (this.blinkCounter < 1)) {
       this.message = 'You fall asleep at: ';
       if ( this.startDate.getMinutes() / 10 < 1) {
@@ -160,6 +151,7 @@ export class OpenWebCamComponent implements OnInit {
     }
     this.blinksPointArr[this.i].blinkCounter = this.blinkCounter;
     this.blinksPointArr[this.i].endDate = new Date();
+    // push the data to arr that show that in graph (by service)
     this.blinksPointArr.push({ startDate: new Date(), endDate: new Date(), blinkCounter: 0 });
     this.startDate = new Date();
     this.blinkCounter = 0;
@@ -173,7 +165,7 @@ export class OpenWebCamComponent implements OnInit {
     this.audio.play();
   }
 
-  goToGraphs() {
+  goToGraphs() { // send the data to serive
     this.openWebService.setBlinksData(this.blinksPointArr);
     this.stopToSing();
     this.stopVideo(this.video.nativeElement);
@@ -191,8 +183,4 @@ export class OpenWebCamComponent implements OnInit {
     this.message = 'You woke up again....';
     this.videoInit();
   }
-
- // getVideoElement() {
- //   return;
- // }
 }

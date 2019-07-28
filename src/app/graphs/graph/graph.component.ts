@@ -45,7 +45,7 @@ export class GraphComponent implements OnInit {
     this.height = '140';
   }
 
-  ngOnInit() {
+  ngOnInit() { // get the data from the servise (by observble)
     this.openWebService.getBlinkData().subscribe(arrBlinks => {
       if (!arrBlinks) {
         return;
@@ -66,10 +66,10 @@ export class GraphComponent implements OnInit {
       if (element.blinkCounter === 200) {
           startDateArry.push('You Fall Asleep at: ' + this.date);
       } else {
-       startDateArry.push(this.date);
+       startDateArry.push(this.date); // push the data to graph
       }
       });
-      this.barChartLabels = startDateArry;
+      this.barChartLabels = startDateArry; // show the data on graph
       this.barChartData = [{ data: blinkArry, label: 'blinks'}];
     });
 

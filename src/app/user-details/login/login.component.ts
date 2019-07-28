@@ -17,7 +17,6 @@ export class LoginComponent implements OnInit {
     emailFormControl: new FormControl('',
       [Validators.required,
        Validators.email,
-      //Validators.pattern('[^ @]*@[^ @]*')
               ]),
     password: new FormControl('',
       [Validators.required,
@@ -30,15 +29,10 @@ export class LoginComponent implements OnInit {
   }
 
   registerClickEvent(email: string, password: string) {
-    console.log(email, password);
-    const observableObj = this.http.post('https://reqres.in/api/register', 'login');
-    observableObj.subscribe((response) => console.log(response));
+   // console.log(email, password);
+   // const observableObj = this.http.post('https://reqres.in/api/register', 'login');
+   // observableObj.subscribe((response) => console.log(response));
     this.router.navigate(['/register']);
-  }
-
-  onSubmit() {
-    console.log(this.loginForm.value);
-    console.log(this.loginForm.controls.email.value);
   }
 
   loginClicked() {

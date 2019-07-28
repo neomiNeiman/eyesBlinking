@@ -1,10 +1,7 @@
 
 <div class="all-login">
- <!-- <img src="assets/add_profile_img7.png" />-->
   <i id="img_icon_login" class="material-icons">supervisor_account</i>
- <!-- <img src="https://ssl.gstatic.com/chat/emoji/8plxssjuw1/emoji_u1f634.png" /> -->
-  <!--<h1>Eyes Blinking </h1>-->
-  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+  <form [formGroup]="loginForm">
       <mat-form-field class="example-full-width">
           <input matInput #emailFieldId placeholder="Enter your Email" formControlName="emailFormControl">
          <mat-error *ngIf="loginForm.get('emailFormControl').hasError('email') && !loginForm.get('emailFormControl').hasError('required')">
@@ -27,5 +24,4 @@
     <button mat-raised-button type="submit" color="primary" [disabled]="!loginForm.valid" (click)="loginClicked()">Login</button>
     <button mat-raised-button color="primary" type="button" (click)="registerClickEvent(emailFieldId.value, passFieldId.value)" >Register</button>
   </form>
-  <!--<div *ngIf="!loginForm.controls.email.value">email is required</div>-->
 </div>
