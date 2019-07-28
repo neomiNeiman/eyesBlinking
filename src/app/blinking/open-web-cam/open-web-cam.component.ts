@@ -101,7 +101,9 @@ export class OpenWebCamComponent implements OnInit {
         const date = new Date();
         if (date.getMinutes() - this.startDate.getMinutes() > 0) {
           // if (date.getHours() - this.startDate.getHours() >= 1) {
-          this.resetCounters();
+          if (this.flagBlinking === 1) {
+             this.resetCounters();
+          }
           // }
         }
       }
@@ -124,21 +126,18 @@ export class OpenWebCamComponent implements OnInit {
       const diffTime = Math.abs(crntDate - prevTime);
       if (this.flagBlinking === 0) {
       if (timeStart <= 20) {
-      //  if ( this.flagBlinking === 0) {
           this.countStart++;
         } else {
           this.flagBlinking = 1;
         }
       } else {
       if (diffTime <= 20) {
-         // this.flagBlinking = 1;
           this.timeCounter++;
           if (this.timeCounter > this.countStart) {
             this.message = 'please go to sleep :)';
             if (this.flag === 0) {
               this.playAudio();
               this.flag = 1;
-         //   }
             }
           }
         }
